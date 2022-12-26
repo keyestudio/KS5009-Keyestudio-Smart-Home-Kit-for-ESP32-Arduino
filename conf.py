@@ -17,9 +17,9 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'KS5009 Keyestudio Smart Home Kit for ESP32 Arduino'
-copyright = 'keyestudio , WiKi'
-author = 'keyestudio WiKi'
+project = 'ESP32 Smart Home Kit for Arduino'
+copyright = 'keyestudio wiki'
+author = 'keyestudio'
 
 # -- General configuration ---------------------------------------------------
 
