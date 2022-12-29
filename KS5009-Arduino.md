@@ -393,9 +393,9 @@ LED is also the light-emitting diode, which can be made into an electronic modul
 
 **4.Control Pin**
 
-| Yellow LED | 12 |
-|------------|----|
-|            |    |
+| Yellow LED connected to io12|  
+|------------|
+|![](media/1.1.png)|
 
 **5.Test Code**
 
@@ -423,7 +423,13 @@ It makes sense to take advantage of PWM. Output the number of high level and low
 
 We provide the PWM output library file \< analogwrite.h \> for ESP32, therefore solely a simple statement analogWrite(); can control the PWM output.
 
-**2.Test Code**
+**2.Control Pin**
+
+| Yellow LED connected to io12|  
+|------------|
+|![](media/1.1.png)|
+
+**3.Test Code**
 
 | \#include \<analogWrite.h\> //Import PWM output library files \#define led_y 12 //Define LED pins   void setup(){  pinMode(led_y, OUTPUT); //Set pin to output mode }  void loop(){  for(int i=0; i\<255; i++) //The for loop statement increments the value of variable i until it exits the loop at 255   {  analogWrite(led_y, i); //PWM output, control LED brightness  delay(3);  }  for(int i=255; i\>0; i--) //The for loop statement continues to decrease the value of variable i until it exits the loop at 0  analogWrite(led_y, i);  delay(3);  } } |
 
@@ -434,7 +440,7 @@ We provide the PWM output library file \< analogwrite.h \> for ESP32, therefore 
 
 
 
-**3.Test Result**
+**4.Test Result**
 
 The LED gradually gets dimmer then brighter, cyclically, like human breathe.
 
