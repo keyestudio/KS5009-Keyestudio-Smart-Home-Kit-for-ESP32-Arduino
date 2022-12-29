@@ -291,7 +291,7 @@ Import the library. You can find it in the include library list.
 | Step 7                                                                       |                                                   |
 |    Components Required                                                       | ![](media/4842582f892bcb0ab270554ca1487c42.png)   |
 | Adjust the angle of the servo                                                | need to adjust the servo of the window to 0 degree before installation.|
-| Installation (As shown in the picture)                                       | ![](media/aa95521f86389ec884e71c5dc41fee57.png)   |
+| Installation                                                                 | ![](media/aa95521f86389ec884e71c5dc41fee57.png)   |
 |   Prototype                                                                  | ![](media/adfb7abbafd97f2eaf73ee05e6ef74ec.png)   |
 | Step 8                                                                       |                                                   |
 |    Components Required                                                       | ![](media/d2a9dbb7352038e6c8d06037d8479849.png)   |
