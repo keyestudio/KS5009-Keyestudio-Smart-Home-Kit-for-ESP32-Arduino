@@ -274,7 +274,7 @@ Import the library. You can find it in the include library list.
 |   Prototype                                                                  | ![](media/1dd06d0e20d6e82c3d40de86499595ec.png)   |
 | Step 3                                                                       |                                                   |
 |    Components Required                                                       | ![](media/70dde8f4791ac31969167ec98a71c9ff.png)   |
-|  Installation （Battery holder wire installs downward）                      | ![](media/f99d8208a13cb6ec7b37d92ea6bf44d4.png)   |
+|  Installation                          | ![](media/f99d8208a13cb6ec7b37d92ea6bf44d4.png)（Battery holder wire installs downward）|
 |   Prototype                                                                  | ![](media/3e41a27e6450b4b465ce6adf7442e981.png)   |
 | Step 4                                                                       |                                                   |
 |    Components Required                                                       | ![](media/dc3d7d2ad06a95ff0073cca27257d8ba.png)   |
