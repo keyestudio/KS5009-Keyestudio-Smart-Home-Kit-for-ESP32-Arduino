@@ -290,7 +290,7 @@ Import the library. You can find it in the include library list.
 |   Prototype                                                                  | ![](media/60e168e21936ccdd39883ec5259a5dcf.png)   |
 | Step 7                                                                       |                                                   |
 |    Components Required                                                       | ![](media/4842582f892bcb0ab270554ca1487c42.png)   |
-| Adjust the angle of the servo before installation                            | We need to adjust the servo of the window to 0 degree before installation.  Please open and burn it to the motherboard, as shown below ![](media/fef3ff6ce0bba19df94bb5cbac961c8c.png)                              |
+| Adjust the angle of the servo before installation                            | We need to adjust the servo of the window to 0 degree before installation.   ![](media/fef3ff6ce0bba19df94bb5cbac961c8c.png)                              |
 | Installation (As shown in the picture)                                       | ![](media/aa95521f86389ec884e71c5dc41fee57.png)   |
 |   Prototype                                                                  | ![](media/adfb7abbafd97f2eaf73ee05e6ef74ec.png)   |
 | Step 8                                                                       |                                                   |
