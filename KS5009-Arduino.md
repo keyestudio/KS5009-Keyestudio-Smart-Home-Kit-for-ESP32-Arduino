@@ -274,7 +274,7 @@ Import the library. You can find it in the include library list.
 |   Prototype                                                                  | ![](media/1dd06d0e20d6e82c3d40de86499595ec.png)   |
 | Step 3                                                                       |                                                   |
 |    Components Required                                                       | ![](media/70dde8f4791ac31969167ec98a71c9ff.png)   |
-|  Installation                          | ![](media/f99d8208a13cb6ec7b37d92ea6bf44d4.png)（Battery holder wire installs downward）|
+|  Installation                                                                | ![](media/f99d8208a13cb6ec7b37d92ea6bf44d4.png)|
 |   Prototype                                                                  | ![](media/3e41a27e6450b4b465ce6adf7442e981.png)   |
 | Step 4                                                                       |                                                   |
 |    Components Required                                                       | ![](media/dc3d7d2ad06a95ff0073cca27257d8ba.png)   |
@@ -286,11 +286,11 @@ Import the library. You can find it in the include library list.
 |   Prototype                                                                  | ![](media/71080dc63e65195e7dc28d94f3041319.png)   |
 | Step 6                                                                       |                                                   |
 |    Components Required                                                       | ![](media/d4f07269d100e0f46851252e28ba8383.png)   |
-| Installation （Don’t tighten the self-locking nuts ）                        | ![](media/553ac0654da4c14ad9b958ac16c46ccd.png)   |
+| Installation                                                                 |（Don’t tighten the self-locking nuts ） ![](media/553ac0654da4c14ad9b958ac16c46ccd.png)   |
 |   Prototype                                                                  | ![](media/60e168e21936ccdd39883ec5259a5dcf.png)   |
 | Step 7                                                                       |                                                   |
 |    Components Required                                                       | ![](media/4842582f892bcb0ab270554ca1487c42.png)   |
-| Adjust the angle of the servo before installation                            | We need to adjust the servo of the window to 0 degree before installation.   ![](media/fef3ff6ce0bba19df94bb5cbac961c8c.png)                              |
+| Adjust the angle of the servo                                                | We need to adjust the servo of the window to 0 degree before installation.   ![](media/fef3ff6ce0bba19df94bb5cbac961c8c.png)                              |
 | Installation (As shown in the picture)                                       | ![](media/aa95521f86389ec884e71c5dc41fee57.png)   |
 |   Prototype                                                                  | ![](media/adfb7abbafd97f2eaf73ee05e6ef74ec.png)   |
 | Step 8                                                                       |                                                   |
