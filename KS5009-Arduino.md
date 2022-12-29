@@ -342,20 +342,20 @@ Import the library. You can find it in the include library list.
 |   Installation Diagram                                                       | ![](media/9637cad77c563081c78bd014920d44d8.png)   |
 |   Prototype                                                                  | ![](media/85f68b8b0880c6834105a23c21c3ba00.png)   |
 | Wiring Part                                                                  |                                                   |
-|   Connect the temperature and humidity module to the io17 interface          | ![](media/b20fffd8e6d99fdea58ac47ab4b339a5.png)   |
-|    Connect the yellow led module to the io12 interface                       | ![](media/8f254931280578d7829b16344a9e2bda.png)   |
-|    Connect the steam sensor to the io34 interface                            | ![](media/db35422182a8b02ed371bcecbf4640b8.png)   |
-|    The wiring of the fan (IN- corresponds to io18，IN+ corresponds to io19） | ![](media/8688977d33afcb5fe1542b31e5cf0259.png)   |
-|    Connect the PIR motion sensor to the io14 interface                       | ![](media/6572ce6a6ddfc8bf17945fc71897d9fb.png)   |
-|   Connect the left button module to the io16 interface                       | ![](media/2d579eeb0aa3a6f71f1572e1579d153f.png)   |
-|     Connect the right button module to the io27 interface                    | ![](media/639ac8cf0b991c7c150a6b4be8cf8e93.png)   |
-|    Connect the RFID module to the IIC interface                              | ![](media/142fd5fdd102aa25eb3f8406e257ccaf.png)   |
-|     Connect the LCD1602 display to the IIC interface                         | ![](media/518e6c496b5c22b7d4b0c4de40acc80e.png)   |
-|    Connect the 6812RGB LED to the io26 interface                             | ![](media/4edea8aa5ff83d17fa8cab9173760c12.png)   |
-|    Connect the gas sensor to the io23 interface                              | ![](media/ed22723361dc2dc2bc0eb6b80c36ce28.png)   |
-|     Connect the buzzer sensor to the io25 interface                          | ![](media/77e7f24ef8d39732a6ae6a9150e86243.png)   |
-|   Connect servo controlling windows to the io5 interface                     | ![](media/4f4c7f0ea162c7de24f1263dafad9075.png)   |
-|    Connect servo controlling doors to the io13 interface                     | ![](media/c6334d6486a50808300936aef00a55e8.png)   |
+| temperature and humidity to io17                                             | ![](media/b20fffd8e6d99fdea58ac47ab4b339a5.png)   |
+| yellow led module to io12                                                    | ![](media/8f254931280578d7829b16344a9e2bda.png)   |
+| steam sensor to the io34 interface                                           | ![](media/db35422182a8b02ed371bcecbf4640b8.png)   |
+| fan (IN- to io18，IN+ to io19）                                              | ![](media/8688977d33afcb5fe1542b31e5cf0259.png)   |
+| PIR motion sensor to the io14                                                | ![](media/6572ce6a6ddfc8bf17945fc71897d9fb.png)   |
+| left button module to the io16                                               | ![](media/2d579eeb0aa3a6f71f1572e1579d153f.png)   |
+| right button module to the io27                                              | ![](media/639ac8cf0b991c7c150a6b4be8cf8e93.png)   |
+| RFID module to the IIC                                                       | ![](media/142fd5fdd102aa25eb3f8406e257ccaf.png)   |
+| LCD1602 display to the IIC                                                   | ![](media/518e6c496b5c22b7d4b0c4de40acc80e.png)   |
+| 6812RGB LED to the io26                                                      | ![](media/4edea8aa5ff83d17fa8cab9173760c12.png)   |
+| gas sensor to the io23                                                       | ![](media/ed22723361dc2dc2bc0eb6b80c36ce28.png)   |
+| buzzer to the io25                                                           | ![](media/77e7f24ef8d39732a6ae6a9150e86243.png)   |
+| servo controlling windows to the io5                                         | ![](media/4f4c7f0ea162c7de24f1263dafad9075.png)   |
+| servo controlling doors to the io13                                          | ![](media/c6334d6486a50808300936aef00a55e8.png)   |
 |     power wiring                                                             | ![](media/66217ef904b5256055eb20b2f8c95678.jpeg)  |
 | Step 20                                                                      |                                                   |
 |    Components Required                                                       | ![](media/981c1d00ec6ffa26832828c3bb50cff2.png)   |
