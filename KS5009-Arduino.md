@@ -677,11 +677,43 @@ In this project, we will work to play a piece of music by using it.
 
 **1. Test Code**
 
-| \#include \<ESP32Tone.h\> \#define buzzer_pin 25  void setup() {  pinMode(buzzer_pin, OUTPUT);  birthday(); }  void loop() {   }  void birthday() {  tone(buzzer_pin,294,250,0); //The four parameters are pin, frequency, delay and channel   tone(buzzer_pin,440,250,0);  tone(buzzer_pin,392,250,0);  tone(buzzer_pin,532,250,0);  tone(buzzer_pin,494,250,0);  tone(buzzer_pin,392,250,0);  tone(buzzer_pin,440,250,0);  tone(buzzer_pin,392,250,0);  tone(buzzer_pin,587,250,0);  tone(buzzer_pin,532,250,0);  tone(buzzer_pin,392,250,0);  tone(buzzer_pin,784,250,0);  tone(buzzer_pin,659,250,0);  tone(buzzer_pin,532,250,0);  tone(buzzer_pin,494,250,0);  tone(buzzer_pin,440,250,0);  tone(buzzer_pin,698,250,0);  tone(buzzer_pin,659,250,0);  tone(buzzer_pin,532,250,0);  tone(buzzer_pin,587,250,0);  tone(buzzer_pin,532,500,0);  noTone(buzzer_pin,0); //Close } |
+    #include <ESP32Tone.h>
+    #define buzzer_pin 25
 
+    void setup() {
+    pinMode(buzzer_pin, OUTPUT);
+    birthday();
+    }
 
+    void loop() {
+    
+    }
 
-
+    void birthday()
+    {
+    tone(buzzer_pin,294,250,0);  //The four parameters are pin, frequency, delay and channel 
+    tone(buzzer_pin,440,250,0);
+    tone(buzzer_pin,392,250,0);
+    tone(buzzer_pin,532,250,0);
+    tone(buzzer_pin,494,250,0);
+    tone(buzzer_pin,392,250,0);
+    tone(buzzer_pin,440,250,0);
+    tone(buzzer_pin,392,250,0);
+    tone(buzzer_pin,587,250,0);
+    tone(buzzer_pin,532,250,0);
+    tone(buzzer_pin,392,250,0);
+    tone(buzzer_pin,784,250,0);
+    tone(buzzer_pin,659,250,0);
+    tone(buzzer_pin,532,250,0);
+    tone(buzzer_pin,494,250,0);
+    tone(buzzer_pin,440,250,0);
+    tone(buzzer_pin,698,250,0);
+    tone(buzzer_pin,659,250,0);
+    tone(buzzer_pin,532,250,0);
+    tone(buzzer_pin,587,250,0);
+    tone(buzzer_pin,532,500,0);
+    noTone(buzzer_pin,0);  //Close
+    }
 
 **2. Test Result**
 
@@ -689,26 +721,84 @@ The passive buzzer will play happy Birthday.
 
 ### Project 4.2 Music Box
 
+**1. Description**
+
 we will make a music box and switch tunes by pressing buttons.
 
-**1. Test Code**
+**2.Pins of the project**
 
-| \#include \<ESP32Tone.h\> \#include \<musicESP32_home.h\>  music Music(25); \#define btn1 16 int btn_count = 0; //Used to count the clicked button times  boolean music_flag = 0;  void setup() {  Serial.begin(9600);  pinMode(btn1, INPUT);  pinMode(25, OUTPUT); // Music.tetris(); // Music.birthday(); // Music.Ode_to_Joy(); // Music.christmas(); // Music.super_mario(); // Music.star_war_tone(); }  void loop() {  boolean btn1_val = digitalRead(btn1);  if(btn1_val == 0) //If the button is pressed  {  delay(10); //Delay 10ms to eliminate button jitter  if(btn1_val == 0) //Make sure the button is pressed again   {  boolean btn_state = 1;  while(btn_state == 1) //Loop indefinitely until the button is released  {  boolean btn_val = digitalRead(btn1);  if(btn_val == 1) //If the button is released  {  music_flag = 1;  btn_count++; //Automatically increments by 1 to count the number of times the button is clicked  Serial.println(btn_count);  if(btn_count == 4)  {  btn_count = 1;  }  switch(btn_count)  {  case 1: if(music_flag == 1){Music.Ode_to_Joy();music_flag=0;} break;  case 2: if(music_flag == 1){Music.christmas();music_flag=0;} break;  case 3: if(music_flag == 1){Music.tetris();music_flag=0;} break;  }  btn_state = 0; //The button is released and exits the loop  }  }  }  } } |
+| button      | 16 |
+|----------   |----|
+| buzzer      | 25 |
+
+![](media/4.2.png)
+
+**3. Test Code**
+
+    #include <ESP32Tone.h>
+    #include <musicESP32_home.h>   
+    music Music(25);
+    #define btn1 16
+    int btn_count = 0; //Used to count the clicked button times 
+    boolean music_flag = 0;
+
+    void setup() {
+    Serial.begin(9600);
+    pinMode(btn1, INPUT);
+    pinMode(25, OUTPUT);
+    //  Music.tetris();
+    //  Music.birthday();
+    //  Music.Ode_to_Joy();
+    //  Music.christmas();
+    //  Music.super_mario();
+    //  Music.star_war_tone();
+    }
+
+    void loop() {
+    boolean btn1_val = digitalRead(btn1);
+    if(btn1_val == 0) //If the button is pressed
+    {
+        delay(10);  //Delay 10ms to eliminate button jitter
+        if(btn1_val == 0) //Make sure the button is pressed again  
+        {
+        boolean btn_state = 1;
+        while(btn_state == 1) //Loop indefinitely until the button is released
+        {
+            boolean btn_val = digitalRead(btn1);
+            if(btn_val == 1)  //If the button is released
+            {
+            music_flag = 1;
+            btn_count++;    //Automatically increments by 1 to count the number of times the button is clicked
+            Serial.println(btn_count);
+            if(btn_count == 4)
+            {
+                btn_count = 1;
+            }
+            switch(btn_count)
+            {
+                case 1: if(music_flag == 1){Music.Ode_to_Joy();music_flag=0;} break;
+                case 2: if(music_flag == 1){Music.christmas();music_flag=0;} break;
+                case 3: if(music_flag == 1){Music.tetris();music_flag=0;} break;
+            }
+            btn_state = 0;  //The button is released and exits the loop
+            }
+        }
+        }
+    }
+    }
 
 
-
-
-**2. Test Result**
+**4. Test Result**
 
 Click button 1 once, it will play a tetris, then click it again, it will play Ode_to_Joy, after playing, click the button 1 for the third time, it will play Christmas.
 
 ### Project 5.1 Control the Door
 
-1.  **Description**
+**1.Description**
 
 Automatic doors and windows need power device, which will become more automatic with a 180 degree servo and some sensors. Adding a raindrop sensor, you can achieve the effect of closing windows automatically when raining. If adding a RFID, we can realize the effect of swiping to open the door and so on.
 
-1.  **Component Knowledge**
+**2.Component Knowledge**
 
 **Servo:** Servo is a position servo [driver](C:/Users/NINGMEI/AppData/Local/youdao/dict/Application/8.10.7.0/resultui/html/index.html#/javascript:;) device consists of a housing, a circuit board, a coreless motor, a gear and a position detector.
 
@@ -728,57 +818,104 @@ In general, servo has three lines in brown, red and orange. The brown wire is gr
 
 ![](media/6cbf6f177ea204f7632b872497fde010.png)
 
-1.  **Pin**
+**3.Pin**
 
 | The servo of the window | 5  |
 |-------------------------|----|
 | The servo of the door   | 13 |
 
+![](media/5.1.png)
+
 **4.Test Code**
 
-| \#include \<ESP32_Servo.h\> Servo myservo; // create servo object to control a servo  // 16 servo objects can be created on the ESP32   int pos = 0; // variable to store the servo position // Recommended PWM GPIO pins on the ESP32 include 2,4,12-19,21-23,25-27,32-33  int servoPin = 13;   void setup() {  myservo.attach(servoPin); // attaches the servo on pin 18 to the servo object  }  void loop() {  for (pos = 0; pos \<= 180; pos += 1) { // goes from 0 degrees to 180 degrees  // in steps of 1 degree  myservo.write(pos); // tell servo to go to position in variable 'pos'  delay(15); // waits 15ms for the servo to reach the position  }  for (pos = 180; pos \>= 0; pos -= 1) { // goes from 180 degrees to 0 degrees  myservo.write(pos); // tell servo to go to position in variable 'pos'  delay(15); // waits 15ms for the servo to reach the position  } } |
+    #include <ESP32_Servo.h>
+    Servo myservo;  // create servo object to control a servo
+                    // 16 servo objects can be created on the ESP32
+                    
+    int pos = 0;    // variable to store the servo position
+    // Recommended PWM GPIO pins on the ESP32 include 2,4,12-19,21-23,25-27,32-33 
+    int servoPin = 13;
+                    
+    void setup() {
+    myservo.attach(servoPin);   // attaches the servo on pin 18 to the servo object
 
+    }
 
-
-
-
+    void loop() {
+    for (pos = 0; pos <= 180; pos += 1) { // goes from 0 degrees to 180 degrees
+        // in steps of 1 degree
+        myservo.write(pos);              // tell servo to go to position in variable 'pos'
+        delay(15);                       // waits 15ms for the servo to reach the position
+    }
+    for (pos = 180; pos >= 0; pos -= 1) { // goes from 180 degrees to 0 degrees
+        myservo.write(pos);              // tell servo to go to position in variable 'pos'
+        delay(15);                       // waits 15ms for the servo to reach the position
+    }
+    }
 **5.Test Result**
 
 The servo of the door turns with the door, back and forth
 
 ### Project 5.2 Close the Window
 
-1.  **Description**
+**1.Description**
 
 We will work to use a servo and a raindrop sensor to make an device closing windows automatically when raining.
 
-1.  **Component Knowledge**
+**2.Component Knowledge**
 
 **Raindrop Sensor:** This is an analog input module, the greater the area covered by water on the detection surface, the greater the value returned (range 0\~4096).
 
-1.  **Test Code**
+**3.Pin**
 
-|  \#include \<ESP32_Servo.h\> Servo myservo; \#define servoPin 5 \#define waterPin 34   void setup() {  Serial.begin(9600);  pinMode(waterPin, INPUT);  myservo.attach(servoPin);  myservo.write(176);  delay(200); }  void loop() {  int water_val = analogRead(waterPin);  Serial.println(water_val);  if(water_val \> 1500) {  myservo.write(0);  delay(200);  }  else {  myservo.write(176);  delay(200);  } } |
+| The servo of the window | 5  |
+|-------------------------|----|
+| The servo of the raindrop | 34 |
+
+![](media/5.2.png)
+
+**4.Test Code**
+
+    #include <ESP32_Servo.h>
+    Servo myservo;
+    #define servoPin 5
+    #define waterPin 34
 
 
+    void setup() {
+    Serial.begin(9600);
+    pinMode(waterPin, INPUT);
+    myservo.attach(servoPin);
+    myservo.write(176);
+    delay(200);
+    }
 
+    void loop() {
+    int water_val = analogRead(waterPin);
+    Serial.println(water_val);
+    if(water_val > 1500) {
+        myservo.write(0);
+        delay(200);
+    }
+    else {
+        myservo.write(176);
+        delay(200);
+    }
+    }
 
-
-
-
-1.  **Test Result**
+**5.Test Result**
 
 At first, the window opens automatically, and when you touch the raindrop sensor with your hand (which has water on the skin), the window will close.
 
 ### Project 6.1 Control SK6812
 
-1.  **Description**
+**1.Description**
 
 The atmosphere lamp of smart home is 4 SK6812RGB LEDs. RGB LED belongs to a simple luminous module, which can adjust the color to bring out the lamp effect of different colors. Furthermore, it can be widely used in buildings, bridges, roads, gardens, courtyards, floors and other fields of decorative lighting and venue layout, Christmas, Halloween, Valentine's Day, Easter, National Day as well as other festivals during the atmosphere and other scenes.
 
 In this experiment, we will make various lighting effects.
 
-1.  **Component Knowledge**
+**2.Component Knowledge**
 
 From the schematic diagram, we can see that these four RGB LEDs are all connected in series. In fact, no matter how many they are, we can use a pin to control a RGB LED and let it display any color. Each RGBLED is an independent pixel, composed of R, G and B colors, which can achieve 256 levels of brightness display and complete the full true color display of 16777216 colors.
 
@@ -788,17 +925,136 @@ What’s more, the pixel point contains a data latch signal shaping amplifier dr
 
 ![](media/c0df93f61c6b9272f62b1847ccfbdb10.png)
 
-1.  **Pin**
+**3.Pin**
 
-| SK6812 | 26 |
+| SK6812 connectet to io26 |
 |--------|----|
-|        |    |
+|   ![](media/6.1.png)     |    |
 
 **4. Test Code**
 
-Please open the provided test code pj6_1_SK6812, as shown in the image below:
+    #include <Adafruit_NeoPixel.h>
+    #ifdef __AVR__
+    #include <avr/power.h> // Required for 16 MHz Adafruit Trinket
+    #endif
+    // Which pin on the Arduino is connected to the NeoPixels?
+    // On a Trinket or Gemma we suggest changing this to 1:
+    #define LED_PIN    26
+    // How many NeoPixels are attached to the Arduino?
+    #define LED_COUNT 4
+    // Declare our NeoPixel strip object:
+    Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
 
-![](media/b5485e8a24aebc8fee5ed77ed3f9108f.png)
+    void setup() {
+    // These lines are specifically to support the Adafruit Trinket 5V 16 MHz.
+    // Any other board, you can remove this part (but no harm leaving it):
+    #if defined(__AVR_ATtiny85__) && (F_CPU == 16000000)
+    clock_prescale_set(clock_div_1);
+    #endif
+    // END of Trinket-specific code.
+
+    strip.begin();           // INITIALIZE NeoPixel strip object (REQUIRED)
+    strip.show();            // Turn OFF all pixels ASAP
+    strip.setBrightness(50); // Set BRIGHTNESS to about 1/5 (max = 255)
+    }
+
+
+    // loop() function -- runs repeatedly as long as board is on ---------------
+
+    void loop() {
+    // Fill along the length of the strip in various colors...
+    colorWipe(strip.Color(255,   0,   0), 50); // Red
+    colorWipe(strip.Color(  0, 255,   0), 50); // Green
+    colorWipe(strip.Color(  0,   0, 255), 50); // Blue
+
+    // Do a theater marquee effect in various colors...
+    theaterChase(strip.Color(127, 127, 127), 50); // White, half brightness
+    theaterChase(strip.Color(127,   0,   0), 50); // Red, half brightness
+    theaterChase(strip.Color(  0,   0, 127), 50); // Blue, half brightness
+
+    rainbow(10);             // Flowing rainbow cycle along the whole strip
+    theaterChaseRainbow(50); // Rainbow-enhanced theaterChase variant
+    }
+
+
+    // Some functions of our own for creating animated effects -----------------
+
+    // Fill strip pixels one after another with a color. Strip is NOT cleared
+    // first; anything there will be covered pixel by pixel. Pass in color
+    // (as a single 'packed' 32-bit value, which you can get by calling
+    // strip.Color(red, green, blue) as shown in the loop() function above),
+    // and a delay time (in milliseconds) between pixels.
+    void colorWipe(uint32_t color, int wait) {
+    for(int i=0; i<strip.numPixels(); i++) { // For each pixel in strip...
+        strip.setPixelColor(i, color);         //  Set pixel's color (in RAM)
+        strip.show();                          //  Update strip to match
+        delay(wait);                           //  Pause for a moment
+    }
+    }
+
+    // Theater-marquee-style chasing lights. Pass in a color (32-bit value,
+    // a la strip.Color(r,g,b) as mentioned above), and a delay time (in ms)
+    // between frames.
+    void theaterChase(uint32_t color, int wait) {
+    for(int a=0; a<10; a++) {  // Repeat 10 times...
+        for(int b=0; b<3; b++) { //  'b' counts from 0 to 2...
+        strip.clear();         //   Set all pixels in RAM to 0 (off)
+        // 'c' counts up from 'b' to end of strip in steps of 3...
+        for(int c=b; c<strip.numPixels(); c += 3) {
+            strip.setPixelColor(c, color); // Set pixel 'c' to value 'color'
+        }
+        strip.show(); // Update strip with new contents
+        delay(wait);  // Pause for a moment
+        }
+    }
+    }
+
+    // Rainbow cycle along whole strip. Pass delay time (in ms) between frames.
+    void rainbow(int wait) {
+    // Hue of first pixel runs 5 complete loops through the color wheel.
+    // Color wheel has a range of 65536 but it's OK if we roll over, so
+    // just count from 0 to 5*65536. Adding 256 to firstPixelHue each time
+    // means we'll make 5*65536/256 = 1280 passes through this outer loop:
+    for(long firstPixelHue = 0; firstPixelHue < 5*65536; firstPixelHue += 256) {
+        for(int i=0; i<strip.numPixels(); i++) { // For each pixel in strip...
+        // Offset pixel hue by an amount to make one full revolution of the
+        // color wheel (range of 65536) along the length of the strip
+        // (strip.numPixels() steps):
+        int pixelHue = firstPixelHue + (i * 65536L / strip.numPixels());
+        // strip.ColorHSV() can take 1 or 3 arguments: a hue (0 to 65535) or
+        // optionally add saturation and value (brightness) (each 0 to 255).
+        // Here we're using just the single-argument hue variant. The result
+        // is passed through strip.gamma32() to provide 'truer' colors
+        // before assigning to each pixel:
+        strip.setPixelColor(i, strip.gamma32(strip.ColorHSV(pixelHue)));
+        }
+        strip.show(); // Update strip with new contents
+        delay(wait);  // Pause for a moment
+    }
+    }
+
+    // Rainbow-enhanced theater marquee. Pass delay time (in ms) between frames.
+    void theaterChaseRainbow(int wait) {
+    int firstPixelHue = 0;     // First pixel starts at red (hue 0)
+    for(int a=0; a<30; a++) {  // Repeat 30 times...
+        for(int b=0; b<3; b++) { //  'b' counts from 0 to 2...
+        strip.clear();         //   Set all pixels in RAM to 0 (off)
+        // 'c' counts up from 'b' to end of strip in increments of 3...
+        for(int c=b; c<strip.numPixels(); c += 3) {
+            // hue of pixel 'c' is offset by an amount to make one full
+            // revolution of the color wheel (range 65536) along the length
+            // of the strip (strip.numPixels() steps):
+            int      hue   = firstPixelHue + c * 65536L / strip.numPixels();
+            uint32_t color = strip.gamma32(strip.ColorHSV(hue)); // hue -> RGB
+            strip.setPixelColor(c, color); // Set pixel 'c' to value 'color'
+        }
+        strip.show();                // Update strip with new contents
+        delay(wait);                 // Pause for a moment
+        firstPixelHue += 65536 / 90; // One cycle of color wheel over 90 frames
+        }
+    }
+    }
+
 
 **5. Test Result**
 
@@ -806,33 +1062,138 @@ The atmosphere lamps of the smart home will display a variety of colors and ligh
 
 ### Project 6.2 Button
 
-1.  **Description**
+**1.Description**
 
 There are two buttons to switch the color of the atmosphere lamp.
 
-1.  **Test Code**
+**2.Pin**
 
-Please open the provided test code pj6_2_btn_6812, as shown below:
+| button1     | 16  |
+|-------------------|----|
+| button2     | 27 |
+| 6812 RGB    | 26 |
 
-![](media/0fdb94dd498f88a55cd57c7603fe43c6.png)
+![](media/6.2.png)
 
-1.  **Test Result**
+**3.Test Code**
+
+    #define btn1 16
+    #define btn2 27
+    #include <Adafruit_NeoPixel.h>
+    #ifdef __AVR__
+    #include <avr/power.h> // Required for 16 MHz Adafruit Trinket
+    #endif
+    // Which pin on the Arduino is connected to the NeoPixels?
+    // On a Trinket or Gemma we suggest changing this to 1:
+    #define LED_PIN    26
+    // How many NeoPixels are attached to the Arduino?
+    #define LED_COUNT 4
+    // Declare our NeoPixel strip object:
+    Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
+
+    int btn_count = 0; //Used to count the number of button clicks
+
+    void setup() {
+    Serial.begin(9600);
+    pinMode(btn1, INPUT);
+    pinMode(btn2, INPUT);
+    #if defined(__AVR_ATtiny85__) && (F_CPU == 16000000)
+        clock_prescale_set(clock_div_1);
+    #endif
+        // END of Trinket-specific code.
+
+    strip.begin();           // INITIALIZE NeoPixel strip object (REQUIRED)
+    strip.show();            // Turn OFF all pixels ASAP
+    strip.setBrightness(50); // Set BRIGHTNESS to about 1/5 (max = 255)
+
+    }
+
+    void loop() {
+        boolean btn1_val = digitalRead(btn1);
+        boolean btn2_val = digitalRead(btn2);
+        if(btn1_val == 0) //If the button is pressed
+        {
+            delay(10); //delay 10ms, to eliminate the button shake
+            if(btn1_val == 0) // make sure the button is pressed again
+            {
+            boolean btn_state = 1;
+            while(btn_state == 1) // infinite loop until the button is released
+            {
+                boolean btn_val = digitalRead(btn1);
+                if(btn_val == 1) //if the button is released
+                {
+                btn_count--; //Automatically add 1 to calculate the number of times the button is clicked
+                if(btn_count <= 0)
+                {
+                    btn_count = 0;
+                }
+                Serial. println(btn_count);
+                btn_state = 0; //The button is released, exit the loop
+                }
+            }
+            }
+        }
+            
+        if(btn2_val == 0) //if the button is pressed
+        {
+            delay(10); //Delay 10ms, to eliminate button jitter
+            if(btn2_val == 0) // make sure the button is pressed again
+            {
+            boolean btn_state2 = 1;
+            while(btn_state2 == 1) // infinite loop until the button is released
+            {
+                boolean btn2_val = digitalRead(btn2);
+                if(btn2_val == 1) //if the button is released
+                {
+                btn_count++; //Automatically add 1 to calculate the number of times the button is clicked
+                if(btn_count >= 6)
+                {
+                    btn_count = 6;
+                }
+                Serial. println(btn_count);
+                btn_state2 = 0; //The button is released, exit the loop
+                }
+            }
+            }
+        }
+    switch(btn_count)
+    {
+        case 0: colorWipe(strip.Color(0,   0,   0), 50); break;
+        case 1: colorWipe(strip.Color(255,  0,   0), 50); break;
+        case 2: colorWipe(strip.Color(0,   255,   0), 50); break;
+        case 3: colorWipe(strip.Color(0,   0,   255), 50); break;
+        case 4: colorWipe(strip.Color(255,   255,   0), 50); break;
+        case 5: colorWipe(strip.Color(255,   0,   255), 50); break;
+        case 6: colorWipe(strip.Color(255,   255,   255), 50); break;
+    }
+    }
+
+    void colorWipe(uint32_t color, int wait) {
+    for(int i=0; i<strip.numPixels(); i++) { // For each pixel in strip...
+        strip.setPixelColor(i, color);         //  Set pixel's color (in RAM)
+        strip.show();                          //  Update strip to match
+        delay(wait);                           //  Pause for a moment
+    }
+    }
+
+
+**4.Test Result**
 
 We can switch the color of the atmosphere lamp by clicking buttons 1 and 2.
 
 ### Project 7.1 Control the Fan
 
-1.  **Description**
+**1.Description**
 
 In this project, we will learn how to make a small fan.
 
-1.  **Component Knowledge**
+**2.Component Knowledge**
 
 The small fan uses a 130 DC motor and safe fan blades. You can use PWM output to control the fan speed.
 
 ![](media/33da52918e88862a94035d61a9050f2e.png)
 
-1.  **Control Method**
+**3.Control Method**
 
 Two pins are required to control the motor of the fan, one for INA and two for INB. The PWM value range is 0\~255. When the PWM output of the two pins is different, the fan can rotate.
 
@@ -841,68 +1202,192 @@ Two pins are required to control the motor of the fan, one for INA and two for I
 | INA - INB \>= 45   | Rotate [anticlockwise](C:/Users/NINGMEI/AppData/Local/youdao/dict/Application/8.10.7.0/resultui/html/index.html#/javascript:;) |
 | INA == 0, INB == 0 | Stop                                                                                                                           |
 
-1.  **Control Pins**
+**4.Control Pins**
 
 | INA | 19 |
 |-----|----|
 | INB | 18 |
 
-**5. Test Code**
+![](media/7.1.png)
 
-| \#include \<analogWrite.h\> \#define fanPin1 19 \#define fanPin2 18  void setup() {  pinMode(fanPin1, OUTPUT);  pinMode(fanPin2, OUTPUT); }  void loop() {  digitalWrite(fanPin1, LOW); //pwm = 0  analogWrite(fanPin2, 180);  delay(3000);  digitalWrite(fanPin1, LOW);  digitalWrite(fanPin2, LOW);  delay(1000);  digitalWrite(fanPin1, HIGH); //pwm = 255  analogWrite(fanPin2, 210);  delay(3000);  digitalWrite(fanPin1, LOW);  digitalWrite(fanPin2, LOW);  delay(1000); } |
+**5.Test Code**
 
+    #include <analogWrite.h>
+    #define fanPin1 19
+    #define fanPin2 18
 
+    void setup() {
+    pinMode(fanPin1, OUTPUT);
+    pinMode(fanPin2, OUTPUT);
+    }
 
-
-
-
-
+    void loop() {
+    digitalWrite(fanPin1, LOW); //pwm = 0
+    analogWrite(fanPin2, 180);
+    delay(3000);
+    digitalWrite(fanPin1, LOW);
+    digitalWrite(fanPin2, LOW);
+    delay(1000);
+    digitalWrite(fanPin1, HIGH); //pwm = 255
+    analogWrite(fanPin2, 210);
+    delay(3000);
+    digitalWrite(fanPin1, LOW);
+    digitalWrite(fanPin2, LOW);
+    delay(1000);
+    }
 **6. Test Result**
 
-The fan will rotate clockwise and [anticlockwise](C:/Users/NINGMEI/AppData/Local/youdao/dict/Application/8.10.7.0/resultui/html/index.html#/javascript:;) at different
+The fan will rotate clockwise and anticlockwise at different
 
 speeds.
 
 ### Project 7.2 Switch On or Off the Fan
 
+**1.Description**
+
 One button switches the fan on and the other button controls the speed of the fan.
 
-**1. Test Code**
 
-| \#include \<analogWrite.h\> \#define fanPin1 19 \#define fanPin2 18 \#define btn1 16 int btn_count = 0; //Used to count the clicked button times  \#define btn2 27 int btn_count2 = 0; int speed_val = 130; //Define the speed variables  void setup() {  Serial.begin(9600);  pinMode(btn1, INPUT);  pinMode(btn2, INPUT);  pinMode(fanPin1, OUTPUT);  pinMode(fanPin2, OUTPUT); }  void loop() {  boolean btn1_val = digitalRead(btn1);  if(btn1_val == 0) //If the button is pressed  {  delay(10); //Delay 10ms to eliminate button jitter  if(btn1_val == 0) //Make sure the button is pressed again   {  boolean btn_state = 1;  while(btn_state == 1) //Loop indefinitely until the button is released  {  boolean btn_val = digitalRead(btn1);  if(btn_val == 1) //If the button is released  btn_count++; //Automatically increments by 1 to count the clicked button times   Serial.println(btn_count);  btn_state = 0; //The button is released and exits the loop  }  }  }  boolean value = btn_count % 2; //Take the remainder of the value, you will get 0 or 1  while(value == 1)  {  //Serial.println("on");  digitalWrite(fanPin1, LOW); //pwm = 0  analogWrite(fanPin2, speed_val);    boolean btn2_val = digitalRead(btn2);  if(btn2_val == 0)  {  delay(10);  if(btn2_val == 0)  {  boolean btn_state2 = 1;  while(btn_state2 == 1)  {  boolean btn2_val = digitalRead(btn2);  if(btn2_val == 1)  {  btn_count2++;  if(btn_count2 \> 3)  {  btn_count2 = 1;  }  switch(btn_count2)  {  case 1: speed_val = 130; Serial.println(speed_val);break; //Adjust the speed  case 2: speed_val = 180; Serial.println(speed_val);break;  case 3: speed_val = 230; Serial.println(speed_val);break;  }  btn_state2 = 0;  }  }  }  }  boolean btn1_val = digitalRead(btn1);  if(btn1_val == 0) //If the button is pressed  {  digitalWrite(fanPin1, LOW); //pwm = 0  analogWrite(fanPin2, 0);  value = 0; //Exit the loop   }    }  } }  |
+**2.Control Pins**
+
+| INA | 19 |
+|-----|----|
+| INB | 18 |
+| button1 | 16 |
+| button2 | 27 |
 
 
+![](media/7.2.png)
 
+**3.Test Code**
 
+    #include <analogWrite.h>
+    #define fanPin1 19
+    #define fanPin2 18
+    #define btn1 16
+    int btn_count = 0; //Used to count the clicked button times 
+    #define btn2 27
+    int btn_count2 = 0;
+    int speed_val = 130; //Define the speed variables
 
+    void setup() {
+    Serial.begin(9600);
+    pinMode(btn1, INPUT);
+    pinMode(btn2, INPUT);
+    pinMode(fanPin1, OUTPUT);
+    pinMode(fanPin2, OUTPUT);
+    }
 
-**2. Test Result**
+    void loop() {
+    boolean btn1_val = digitalRead(btn1);
+    if(btn1_val == 0) //If the button is pressed
+    {
+        delay(10);  //Delay 10ms to eliminate button jitter
+        if(btn1_val == 0) //Make sure the button is pressed again  
+        {
+        boolean btn_state = 1;
+        while(btn_state == 1) //Loop indefinitely until the button is released
+        {
+            boolean btn_val = digitalRead(btn1);
+            if(btn_val == 1)  //If the button is released
+            btn_count++;    //Automatically increments by 1 to count the clicked button times 
+            Serial.println(btn_count);
+            btn_state = 0;  //The button is released and exits the loop
+            }
+        }
+        }
+        boolean value = btn_count % 2; //Take the remainder of the value, you will get 0 or 1
+        while(value == 1)
+        {
+        //Serial.println("on");
+        digitalWrite(fanPin1, LOW); //pwm = 0
+        analogWrite(fanPin2, speed_val);
+        
+        boolean btn2_val = digitalRead(btn2);
+        if(btn2_val == 0)
+        {
+            delay(10);
+            if(btn2_val == 0)
+            {
+            boolean btn_state2 = 1;
+            while(btn_state2 == 1)
+            {
+                boolean btn2_val = digitalRead(btn2);
+                if(btn2_val == 1)
+                {
+                btn_count2++;
+                if(btn_count2 > 3)
+                {
+                    btn_count2 = 1;
+                }
+                switch(btn_count2)
+                {
+                    case 1: speed_val = 130; Serial.println(speed_val);break;  //Adjust the speed
+                    case 2: speed_val = 180; Serial.println(speed_val);break;
+                    case 3: speed_val = 230; Serial.println(speed_val);break;
+                }
+                btn_state2 = 0;
+                }
+            }
+            }
+        }
+        boolean btn1_val = digitalRead(btn1);
+        if(btn1_val == 0) //If the button is pressed
+        {
+            digitalWrite(fanPin1, LOW); //pwm = 0
+            analogWrite(fanPin2, 0);
+            value = 0;  //Exit the loop 
+        }
+        
+        }
+    }
+    }   
+
+**4. Test Result**
 
 Click button 1, the fan starts to rotate, click button 2, the
 
 speed can be adjusted(there are three different speeds), press the button 1 again, the fan stops.
 
-### Project 8.1 Display [Character](C:/Users/NINGMEI/AppData/Local/youdao/dict/Application/8.10.7.0/resultui/html/index.html#/javascript:;)s
+### Project 8.1 Display Characters
 
-1.  **Description**
+**1.Description**
 
 As we all know, screen is one of the best ways for people to interact with electronic devices.
 
-1.  **Component Knowledge**
+**2.Component Knowledge**
 
 1602 is a line that can display 16 characters. There are two lines, which use IIC communication protocol.
 
 ![](media/066e093f1711ada67d3309ddc9bdc66e.png)
 
-1.  **Control Pins**
+**3.Control Pins**
 
 | SDA | SDA |
 |-----|-----|
 | SCL | SCL |
 
+![](media/8.1.png)
+
 **4. Test Code**
 
-| \#include \<Wire.h\> \#include \<LiquidCrystal_I2C.h\>  LiquidCrystal_I2C mylcd(0x27,16,2);  void setup(){  mylcd.init();  mylcd.backlight(); }  void loop(){  mylcd.setCursor(0, 0);  mylcd.print("hello");  mylcd.setCursor(0, 1);  mylcd.print("keyestudio");  //mylcd.clear(); } |
+    #include <Wire.h>
+    #include <LiquidCrystal_I2C.h>
+
+    LiquidCrystal_I2C mylcd(0x27,16,2);
+
+    void setup(){
+    mylcd.init();
+    mylcd.backlight();
+    }
+
+    void loop(){
+    mylcd.setCursor(0, 0);
+    mylcd.print("hello");
+    mylcd.setCursor(0, 1);
+    mylcd.print("keyestudio");
+    //mylcd.clear();
+    }
 
 
 **5. Test Result**
@@ -921,34 +1406,123 @@ When a gas sensor detects a high concentration of dangerous gas, the buzzer will
 
 ![](media/4550c4935e6c08e595a1e8707b54b551.png)
 
-**3. Test Code**
+**3.Control Pins**
 
-| \#include \<Wire.h\> \#include \<LiquidCrystal_I2C.h\> LiquidCrystal_I2C mylcd(0x27,16,2); \#define gasPin 23 \#define buzPin 25 boolean i = 1; boolean j = 1;  void setup(){  Serial.begin(9600);  mylcd.init();  mylcd.backlight();  pinMode(buzPin, OUTPUT);  pinMode(gasPin, INPUT);  mylcd.setCursor(0, 0);  mylcd.print("safety"); }  void loop(){  boolean gasVal = digitalRead(gasPin); //Reads the value detected by the gas sensor  Serial.println(gasVal);  if(gasVal == 0) //If the hazardous gas is detected，LCD displays dangerous，the buzzer makes an alarm  {  while(i == 1)  {  mylcd.clear();  mylcd.setCursor(0, 0);  mylcd.print("dangerous");  i = 0;  j = 1;  }  digitalWrite(buzPin,HIGH);  delay(1);  digitalWrite(buzPin,LOW);  delay(1);  }  else{  digitalWrite(buzPin,LOW);  while(j == 1)  {  mylcd.clear();  mylcd.setCursor(0, 0);  mylcd.print("safety");  i = 1;  j = 0;  }  } } |
+| SDA | SDA |
+|-----|-----|
+| SCL | SCL |
+| gas module | 23 |
+| buzzer     | 25 |
+
+![](media/8.2.png)
+
+**4. Test Code**
+
+    #include <Wire.h>
+    #include <LiquidCrystal_I2C.h>
+    LiquidCrystal_I2C mylcd(0x27,16,2);
+    #define gasPin 23
+    #define buzPin 25
+    boolean i = 1;
+    boolean j = 1;
+
+    void setup(){
+    Serial.begin(9600);
+    mylcd.init();
+    mylcd.backlight();
+    pinMode(buzPin, OUTPUT);
+    pinMode(gasPin, INPUT);
+    mylcd.setCursor(0, 0);
+    mylcd.print("safety");
+    }
+
+    void loop(){
+    boolean gasVal = digitalRead(gasPin);  //Reads the value detected by the gas sensor
+    Serial.println(gasVal);
+    if(gasVal == 0)  //If the hazardous gas is detected，LCD displays dangerous，the buzzer makes an alarm
+    {
+        while(i == 1)
+        {
+        mylcd.clear();
+        mylcd.setCursor(0, 0);
+        mylcd.print("dangerous");
+        i = 0;
+        j = 1;
+        }
+        digitalWrite(buzPin,HIGH);
+        delay(1);
+        digitalWrite(buzPin,LOW);
+        delay(1);
+    }
+    else{
+        digitalWrite(buzPin,LOW);
+        while(j == 1)
+        {
+        mylcd.clear();
+        mylcd.setCursor(0, 0);
+        mylcd.print("safety");
+        i = 1;
+        j = 0;
+        }
+    }
+    }
 
 
-
-1.  **Test Result**
+**5.Test Result**
 
 The screen displays "safety" in normal state. However, when the gas sensor detects some dangerous gases, such as carbon monoxide, at a certain concentration, the buzzer will sound an alarm and the screen displays "dangerous".
 
 ### Project 9 Temperature and Humidity Tester
 
-1.  **Component Knowledge**
+**1.Component Knowledge**
 
 Its communication mode is serial data and single bus. The temperature measurement range is -20 \~ +60℃, accuracy is ±2℃. However, the humidity range is 5 \~ 95%RH, the accuracy is ±5%RH.
 
 ![](media/0b9c44c3e4f3706638b9cf15871b861c.png)
 
-1.  **Control Pin**
+**2.Control Pin**
 
-| Temperature and Humidity Sensor  | 17 |
+| Temperature and Humidity Sensor io17 |
 |----------------------------------|----|
-|                                  |    |
+|     ![](media/9.1.png)                             |    |
 
 **3. Test Code**
 
-| //\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\* /\*   \* Filename : xht11  \* Description : Read the temperature and humidity values of XHT11.  \* Auther : http//www.keyestudio.coml \*/ \#include \<Wire.h\> \#include \<LiquidCrystal_I2C.h\> LiquidCrystal_I2C mylcd(0x27,16,2); \#include "xht11.h" xht11 xht(17);  unsigned char dht[4] = {0, 0, 0, 0};//Only the first 32 bits of data are received, not the parity bits void setup() {  Serial.begin(9600);//Start the serial port monitor and set baud rate to 9600  mylcd.init();  mylcd.backlight(); }  void loop() {  if (xht.receive(dht)) { //Returns true when checked correctly  Serial.print("RH:");  Serial.print(dht[0]); //The integral part of humidity, DHT [1] is the fractional part  Serial.print("% ");  Serial.print("Temp:");  Serial.print(dht[2]); //The integral part of temperature, DHT [3] is the fractional part  Serial.println("C");    mylcd.setCursor(0, 0);  mylcd.print("T = ");  mylcd.print(dht[2]);  mylcd.setCursor(0, 1);  mylcd.print("H = ");  mylcd.print(dht[0]);  //mylcd.clear();  delay(200);  } else { //Read error  Serial.println("sensor error");  }  delay(1000); //It takes 1000ms to wait for the device to read } //\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\* |
+    #include <Wire.h>
+    #include <LiquidCrystal_I2C.h>
+    LiquidCrystal_I2C mylcd(0x27,16,2);
+    #include "xht11.h"
+    xht11 xht(17);
 
+    unsigned char dht[4] = {0, 0, 0, 0};//Only the first 32 bits of data are received, not the parity bits
+    void setup() {
+    Serial.begin(9600);//Start the serial port monitor and set baud rate to 9600
+    mylcd.init();
+    mylcd.backlight();
+    }
+
+    void loop() {
+    if (xht.receive(dht)) { //Returns true when checked correctly
+        Serial.print("RH:");
+        Serial.print(dht[0]); //The integral part of humidity, DHT [1] is the fractional part
+        Serial.print("%  ");
+        Serial.print("Temp:");
+        Serial.print(dht[2]); //The integral part of temperature, DHT [3] is the fractional part
+        Serial.println("C");
+        
+        mylcd.setCursor(0, 0);
+        mylcd.print("T = ");
+        mylcd.print(dht[2]);
+        mylcd.setCursor(0, 1);
+        mylcd.print("H = ");
+        mylcd.print(dht[0]);
+        //mylcd.clear();
+        delay(200);
+    } else {    //Read error
+        Serial.println("sensor error");
+    }
+    delay(1000);  //It takes 1000ms to wait for the device to read
+    }
 
 
 **4. Test Result**
@@ -975,7 +1549,102 @@ Use IIC communication
 
 **3. Test Code**
 
-| //\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\* /\*   \* Filename : RFID  \* Description : RFID reader UID  \* Auther : http//www.keyestudio.com \*/ \#include \<Wire.h\> \#include \<LiquidCrystal_I2C.h\> LiquidCrystal_I2C mylcd(0x27,16,2); \#include \<ESP32_Servo.h\> Servo myservo; \#include \<Wire.h\> \#include "MFRC522_I2C.h" // IIC pins default to GPIO21 and GPIO22 of ESP32 // 0x28 is the i2c address of SDA, if doesn't match，please check your address with i2c. MFRC522 mfrc522(0x28); // create MFRC522. \#define servoPin 13 \#define btnPin 16 boolean btnFlag = 0;  String password = "";  void setup() {  Serial.begin(115200); // initialize and PC's serial communication  mylcd.init();  mylcd.backlight();  Wire.begin(); // initialize I2C  mfrc522.PCD_Init(); // initialize MFRC522  ShowReaderDetails(); // display PCD - MFRC522 read carder  Serial.println(F("Scan PICC to see UID, type, and data blocks..."));  myservo.attach(servoPin);  pinMode(btnPin, INPUT);  mylcd.setCursor(0, 0);  mylcd.print("Card"); }  void loop() {  //   if ( ! mfrc522.PICC_IsNewCardPresent() \|\| ! mfrc522.PICC_ReadCardSerial() ) {  delay(50);  password = "";  if(btnFlag == 1)  {  boolean btnVal = digitalRead(btnPin);  if(btnVal == 0) //Swipe the card to open the door and click button 1 to close the door  {  Serial.println("close");  mylcd.setCursor(0, 0);  mylcd.print("close");  myservo.write(0);  btnFlag = 0;  }  }  return;  }    // select one of door cards. UID and SAK are mfrc522.uid.    // save UID  Serial.print(F("Card UID:"));  for (byte i = 0; i \< mfrc522.uid.size; i++) {  Serial.print(mfrc522.uid.uidByte[i] \< 0x10 ? " 0" : " ");  //Serial.print(mfrc522.uid.uidByte[i], HEX);  Serial.print(mfrc522.uid.uidByte[i]);  password = password + String(mfrc522.uid.uidByte[i]);  }  if(password == "17121741227") //The card number is correct, open the door  {  Serial.println("open");  mylcd.setCursor(0, 0);  mylcd.clear();  mylcd.print("open");  myservo.write(180);  password = "";  btnFlag = 1;  }  else //The card number is wrong，LCD displays error  {  password = "";  mylcd.setCursor(0, 0);  mylcd.print("error");  }  //Serial.println(password); }  void ShowReaderDetails() {  // attain the MFRC522 software  byte v = mfrc522.PCD_ReadRegister(mfrc522.VersionReg);  Serial.print(F("MFRC522 Software Version: 0x"));  Serial.print(v, HEX);  if (v == 0x91)  Serial.print(F(" = v1.0"));  else if (v == 0x92)  Serial.print(F(" = v2.0"));  else  Serial.print(F(" (unknown)"));  Serial.println("");  // when returning to 0x00 or 0xFF, may fail to transmit communication signals  if ((v == 0x00) \|\| (v == 0xFF)) {  Serial.println(F("WARNING: Communication failure, is the MFRC522 properly connected?"));  } } //\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\* |
+    #include <Wire.h>
+    #include <LiquidCrystal_I2C.h>
+    LiquidCrystal_I2C mylcd(0x27,16,2);
+    #include <ESP32_Servo.h>
+    Servo myservo;
+    #include <Wire.h>
+    #include "MFRC522_I2C.h"
+    // IIC pins default to GPIO21 and GPIO22 of ESP32
+    // 0x28 is the i2c address of SDA, if doesn't match，please check your address with i2c.
+    MFRC522 mfrc522(0x28);   // create MFRC522.
+    #define servoPin  13
+    #define btnPin 16
+    boolean btnFlag = 0;
+
+    String password = "";
+
+    void setup() {
+    Serial.begin(115200);           // initialize and PC's serial communication
+    mylcd.init();
+    mylcd.backlight();
+    Wire.begin();                   // initialize I2C
+    mfrc522.PCD_Init();             // initialize MFRC522
+    ShowReaderDetails();            // display PCD - MFRC522 read carder
+    Serial.println(F("Scan PICC to see UID, type, and data blocks..."));
+    myservo.attach(servoPin);
+    pinMode(btnPin, INPUT);
+    mylcd.setCursor(0, 0);
+    mylcd.print("Card");
+    }
+
+    void loop() {
+    // 
+    if ( ! mfrc522.PICC_IsNewCardPresent() || ! mfrc522.PICC_ReadCardSerial() ) {
+        delay(50);
+        password = "";
+        if(btnFlag == 1)
+        {
+        boolean btnVal = digitalRead(btnPin);
+        if(btnVal == 0)  //Swipe the card to open the door and click button 1 to close the door
+        {
+            Serial.println("close");
+            mylcd.setCursor(0, 0);
+            mylcd.print("close");
+            myservo.write(0);
+            btnFlag = 0;
+        }
+        }
+        return;
+    }
+    
+    // select one of door cards. UID and SAK are mfrc522.uid.
+    
+    // save UID
+    Serial.print(F("Card UID:"));
+    for (byte i = 0; i < mfrc522.uid.size; i++) {
+        Serial.print(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " ");
+        //Serial.print(mfrc522.uid.uidByte[i], HEX);
+        Serial.print(mfrc522.uid.uidByte[i]);
+        password = password + String(mfrc522.uid.uidByte[i]);
+    }
+    if(password == "17121741227")  //The card number is correct, open the door
+    {
+        Serial.println("open");
+        mylcd.setCursor(0, 0);
+        mylcd.clear();
+        mylcd.print("open");
+        myservo.write(180);
+        password = "";
+        btnFlag = 1;
+    }
+    else   //The card number is wrong，LCD displays error
+    {
+        password = "";
+        mylcd.setCursor(0, 0);
+        mylcd.print("error");
+    }
+    //Serial.println(password);
+    }
+
+    void ShowReaderDetails() {
+    //  attain the MFRC522 software
+    byte v = mfrc522.PCD_ReadRegister(mfrc522.VersionReg);
+    Serial.print(F("MFRC522 Software Version: 0x"));
+    Serial.print(v, HEX);
+    if (v == 0x91)
+        Serial.print(F(" = v1.0"));
+    else if (v == 0x92)
+        Serial.print(F(" = v2.0"));
+    else
+        Serial.print(F(" (unknown)"));
+    Serial.println("");
+    // when returning to 0x00 or 0xFF, may fail to transmit communication signals
+    if ((v == 0x00) || (v == 0xFF)) {
+        Serial.println(F("WARNING: Communication failure, is the MFRC522 properly connected?"));
+    }
+    }
 
 
 **4. Test Result**
