@@ -399,14 +399,18 @@ LED is also the light-emitting diode, which can be made into an electronic modul
 
 **5.Test Code**
 
-| \#define led_y 12 //Define the yellow led pin to 12  void setup() { //The code inside the setup function runs only once  pinMode(led_y, OUTPUT); //Set pin to output mode }  void loop() { //The code inside the loop function will always run in a loop  digitalWrite(led_y, HIGH); //Light up the LED  delay(200); //Delay statement, in ms  digitalWrite(led_y, LOW); //Close the LED  delay(200); } |
+    #define led_y 12  //Define the yellow led pin to 12
 
+    void setup() {    //The code inside the setup function runs only once
+    pinMode(led_y, OUTPUT);  //Set pin to output mode
+    }
 
-
-
-
-
-
+    void loop() {     //The code inside the loop function will always run in a loop
+    digitalWrite(led_y, HIGH);  //Light up the LED
+    delay(200);     //Delay statement, in ms
+    digitalWrite(led_y, LOW);   //Close the LED
+    delay(200);
+    }
 **6.Test Result**
 
 After uploading the code , you can see white and yellow LEDs flashing together.
@@ -431,15 +435,24 @@ We provide the PWM output library file \< analogwrite.h \> for ESP32, therefore 
 
 **3.Test Code**
 
-| \#include \<analogWrite.h\> //Import PWM output library files \#define led_y 12 //Define LED pins   void setup(){  pinMode(led_y, OUTPUT); //Set pin to output mode }  void loop(){  for(int i=0; i\<255; i++) //The for loop statement increments the value of variable i until it exits the loop at 255   {  analogWrite(led_y, i); //PWM output, control LED brightness  delay(3);  }  for(int i=255; i\>0; i--) //The for loop statement continues to decrease the value of variable i until it exits the loop at 0  analogWrite(led_y, i);  delay(3);  } } |
+    #include <analogWrite.h>  //Import PWM output library files
+    #define led_y 12    //Define LED pins  
 
+    void setup(){
+    pinMode(led_y, OUTPUT);  //Set pin to output mode
+    }
 
-
-
-
-
-
-
+    void loop(){
+    for(int i=0; i<255; i++)  //The for loop statement increments the value of variable i until it exits the loop at 255  
+    {
+        analogWrite(led_y, i);  //PWM output, control LED brightness
+        delay(3);
+    }
+    for(int i=255; i>0; i--)  //The for loop statement continues to decrease the value of variable i until it exits the loop at 0
+        analogWrite(led_y, i);
+        delay(3);
+    }
+    }
 **4.Test Result**
 
 The LED gradually gets dimmer then brighter, cyclically, like human breathe.
@@ -464,13 +477,29 @@ The button module is a digital sensor, which can only read 0 or 1. When the modu
 |----------|----|
 | Button 2 | 27 |
 
+![](media/2.1.png)
+
 **4.Test Code**
 
-| \#define btn1 16 \#define btn2 27  void setup() {  Serial.begin(9600);  pinMode(btn1, INPUT);  pinMode(btn2, INPUT); }  void loop() {  boolean btn1_val = digitalRead(btn1);  boolean btn2_val = digitalRead(btn2);  Serial.print("button1 = ");  Serial.print(btn1_val);  Serial.print(" ");  Serial.print("button2 = ");  Serial.println(btn2_val);  delay(100); } |
+    #define btn1 16
+    #define btn2 27
 
+    void setup() {
+    Serial.begin(9600);
+    pinMode(btn1, INPUT);
+    pinMode(btn2, INPUT);
+    }
 
-
-
+    void loop() {
+    boolean btn1_val = digitalRead(btn1);
+    boolean btn2_val = digitalRead(btn2);
+    Serial.print("button1 = ");
+    Serial.print(btn1_val);
+    Serial.print("   ");
+    Serial.print("button2 = ");
+    Serial.println(btn2_val);
+    delay(100);
+    }
 **5.Test Result**
 
 Open the serial monitor of the arduino IDE
@@ -487,16 +516,58 @@ Press the button again to see the change of the button state value, as shown bel
 
 For common simple table lamp, click the button it will be opened, click it again, the lamp will be closed.
 
-**2.Test Code**
+**2.Pins of the project**
+
+| Button   | 16 |
+|----------|----|
+| LED      | 12 |
+
+![](media/2.2.png)
+
+**3.Test Code**
 
 Calculate the clicked button times and take the remainder of 2, you can get 0 or 1 two state values.
 
-| \#define btn1 16 \#define led_y 12 int btn_count = 0; //Used to count the clicked button times   void setup() {  Serial.begin(9600);  pinMode(btn1, INPUT);  pinMode(led_y, OUTPUT); }  void loop() {  boolean btn1_val = digitalRead(btn1);  if(btn1_val == 0) //If the button is pressed  {  delay(10); //Delay 10ms to eliminate button jitter  if(btn1_val == 0) //Make sure the button is pressed again   {  boolean btn_state = 1;  while(btn_state == 1) //Loop indefinitely until the button is released  {  boolean btn_val = digitalRead(btn1);  if(btn_val == 1) //If the button is released  {  btn_count++; //Automatically increments by 1, account the clicked button times  Serial.println(btn_count);  btn_state = 0; //The button is released and exits the loop  }  }  }  boolean value = btn_count % 2; //Take the remainder of the value, you will get 0 or 1  if(value == 1)  {  digitalWrite(led_y, HIGH);  }  else{  digitalWrite(led_y, LOW);  }  } }  |
+    #define btn1 16
+    #define led_y 12
+    int btn_count = 0; //Used to count the clicked button times 
 
+    void setup() {
+    Serial.begin(9600);
+    pinMode(btn1, INPUT);
+    pinMode(led_y, OUTPUT);
+    }
 
-
-
-**3.Test Result**
+    void loop() {
+    boolean btn1_val = digitalRead(btn1);
+    if(btn1_val == 0) //If the button is pressed
+    {
+        delay(10);  //Delay 10ms to eliminate button jitter
+        if(btn1_val == 0) //Make sure the button is pressed again  
+        {
+        boolean btn_state = 1;
+        while(btn_state == 1) //Loop indefinitely until the button is released
+        {
+            boolean btn_val = digitalRead(btn1);
+            if(btn_val == 1)  //If the button is released
+            {
+            btn_count++;    //Automatically increments by 1, account the  clicked button times
+            Serial.println(btn_count);
+            btn_state = 0;  //The button is released and exits the loop
+            }
+        }
+        }
+        boolean value = btn_count % 2; //Take the remainder of the value, you will get 0 or 1
+        if(value == 1)
+        {
+        digitalWrite(led_y, HIGH);
+        }
+        else{
+        digitalWrite(led_y, LOW);
+        }
+    }
+    }  
+**4.Test Result**
 
 Open the serial monitor and print out the clicked button times, then click the button once, the LED will be on, click it again, it will be off.
 
@@ -518,18 +589,25 @@ We will print out the value of the PIR motion sensor through the serial monitor.
 
 **2.Control Pin**
 
-| PIR motion sensor  |  14 |
+| PIR motion sensor connected to io14   |
 |--------------------|-----|
-|                    |     |
+|           ![](media/3.1.png)          |
 
 **3.Test Code**
 
-| \#define pyroelectric 14  void setup() {  Serial.begin(9600);  pinMode(pyroelectric, INPUT); }  void loop() {  boolean pyroelectric_val = digitalRead(pyroelectric);  Serial.print("pyroelectric value = ");  Serial.println(pyroelectric_val);  delay(200); } |
+    #define pyroelectric 14
 
+    void setup() {
+    Serial.begin(9600);
+    pinMode(pyroelectric, INPUT);
+    }
 
-
-
-
+    void loop() {
+    boolean pyroelectric_val = digitalRead(pyroelectric);
+    Serial.print("pyroelectric value = ");
+    Serial.println(pyroelectric_val);
+    delay(200);
+    }
 
 **4.Test Result**
 
@@ -539,17 +617,40 @@ When you stand still in front of the sensor, the reading value is 0, move a litt
 
 ### Project 3.2 PIR Motion Sensor
 
+**1. Description**
+
 If someone moves in front of the sensor, the LED will light up.
+
+**2.Pins of the project**
+
+| PIR      | 14 |
+|----------|----|
+| LED      | 12 |
+
+![](media/3.2.png)
 
 **1.Test Code**
 
-| \#define pyroelectric 14 \#define led_y 12 //Define the yellow led pin to 12 void setup() {  Serial.begin(9600);  pinMode(pyroelectric, INPUT);  pinMode(led_y, OUTPUT); //Set pin to output mode }  void loop() {  boolean pyroelectric_val = digitalRead(pyroelectric);  Serial.print("pyroelectric value = ");  Serial.println(pyroelectric_val);  delay(200);  if(pyroelectric_val == 1)  {  digitalWrite(led_y, HIGH);  }else{  digitalWrite(led_y, LOW);  } } |
+    #define pyroelectric 14
+    #define led_y 12  //Define the yellow led pin to 12
+    void setup() {
+    Serial.begin(9600);
+    pinMode(pyroelectric, INPUT);
+    pinMode(led_y, OUTPUT);  //Set pin to output mode
+    }
 
-
-
-
-
-
+    void loop() {
+    boolean pyroelectric_val = digitalRead(pyroelectric);
+    Serial.print("pyroelectric value = ");
+    Serial.println(pyroelectric_val);
+    delay(200);
+    if(pyroelectric_val == 1)
+    {
+        digitalWrite(led_y, HIGH);
+    }else{
+        digitalWrite(led_y, LOW);
+    }
+    }
 **2.Test Result**
 
 Move your hand in front of the sensor, the LED will turn on. After 5s of immobility, the LED lights will turn off.
@@ -570,9 +671,9 @@ In this project, we will work to play a piece of music by using it.
 
 1.  **Control Pin**
 
-|  Passive Buzzer | 25 |
+|  Passive Buzzer connected to io25 |
 |-----------------|----|
-|                 |    |
+|      ![](media/4.1.png)           |    |
 
 **1. Test Code**
 
