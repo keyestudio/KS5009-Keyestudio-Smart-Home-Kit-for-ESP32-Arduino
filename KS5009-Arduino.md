@@ -669,13 +669,13 @@ In this project, we will work to play a piece of music by using it.
 
 **Passive Buzzer:** The audio power amplifier (like the passive buzzer) does not have internal oscillation. When controlling, we need to input square waves of different frequencies to the positive pole of the component and ground the negative pole to control the power amplifier to chime sounds of different frequencies.
 
-1.  **Control Pin**
+**3.Control Pin**
 
 |  Passive Buzzer connected to io25 |
 |-----------------|----|
 |      ![](media/4.1.png)           |    |
 
-**1. Test Code**
+**4.Test Code**
 
     #include <ESP32Tone.h>
     #define buzzer_pin 25
@@ -1199,7 +1199,7 @@ Two pins are required to control the motor of the fan, one for INA and two for I
 
 | INA - INB \<= -45  | Rotate clockwise                                                                                                               |
 |--------------------|--------------------------------------------------------------------------------------------------------------------------------|
-| INA - INB \>= 45   | Rotate [anticlockwise](C:/Users/NINGMEI/AppData/Local/youdao/dict/Application/8.10.7.0/resultui/html/index.html#/javascript:;) |
+| INA - INB \>= 45   | Rotate anticlockwise |
 | INA == 0, INB == 0 | Stop                                                                                                                           |
 
 **4.Control Pins**
@@ -1484,7 +1484,7 @@ Its communication mode is serial data and single bus. The temperature measuremen
 
 | Temperature and Humidity Sensor io17 |
 |----------------------------------|----|
-|     ![](media/9.1.png)                             |    |
+|     ![](media/9.1.png)           |    |
 
 **3. Test Code**
 
